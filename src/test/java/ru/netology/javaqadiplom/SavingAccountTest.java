@@ -18,4 +18,18 @@ public class SavingAccountTest {
 
         Assertions.assertEquals(2_000 + 3_000, account.getBalance());
     }
+
+    @Test
+    public void shouldYearChange() {
+        SavingAccount account = new SavingAccount(
+                200,
+                0,
+                10_000,
+                15
+        );
+
+        account.yearChange();
+
+        Assertions.assertEquals(30, account.yearChange());
+    }
 }
