@@ -6,7 +6,7 @@ import org.junit.jupiter.api.Test;
 public class SavingAccountTest {
 
     @Test
-    public void shouldAddLessThanMaxBalance() { // тест провален, ошибка в методе
+    public void shouldAdd() { // тест провален, ошибка в методе
         SavingAccount account = new SavingAccount(
                 2_000,
                 1_000,
@@ -27,8 +27,8 @@ public class SavingAccountTest {
                 10_000,
                 5
         );
-
-        Assertions.assertFalse(account.add(10_000));
+        account.add(10_000);
+        Assertions.assertEquals(2_000, account.getBalance());
     }
 
     @Test
@@ -57,6 +57,20 @@ public class SavingAccountTest {
         account.pay(10_000);
 
         Assertions.assertFalse(false);
+    }
+
+    @Test
+    public void shouldPay() {  // списание суммы(остаток больше maxBalance) (Ошибка кода)
+        SavingAccount account = new SavingAccount(
+                15_000,
+                1_000,
+                10_000,
+                5
+        );
+
+        account.pay(2_000);
+
+        Assertions.assertEquals(13_000, account.getBalance());
     }
 
     @Test
@@ -98,25 +112,25 @@ public class SavingAccountTest {
 
         Assertions.assertEquals(200, account.yearChange());
     }
-    //@Test
-    //public void shouldPayBooleanPayWhenInt() {              // тест на тип boolean Pay Account
+    @Test
+    public void shouldPayBooleanPayWhenInt() {              // тест на тип boolean Pay Account
 
-    //    Account account = new Account();
+        Account account = new Account();
 
-    //    account.pay(1); // сумма выше минимального значения, значит должен false сработать
+        account.pay(1);
 
-    //   Assertions.assertFalse(false);
-    //}
+       Assertions.assertFalse(false);
+    }
 
-    //@Test
-    //public void shouldAddBooleanPayWhenInt() {              // тест на тип boolean Pay Account
+    @Test
+    public void shouldAddBooleanPayWhenInt() {              // тест на тип boolean Add Account
 
-    //    Account account = new Account();
+        Account account = new Account();
 
-    //    account.add(1); //
+        account.add(1); //
 
-    //   Assertions.assertFalse(false);
-    //}
+       Assertions.assertFalse(false);
+    }
 
     @Test
     public void shouldSetRate() {              // проверка работы сеттера Rate
