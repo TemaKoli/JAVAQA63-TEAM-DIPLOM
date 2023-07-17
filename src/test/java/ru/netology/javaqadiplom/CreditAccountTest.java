@@ -62,6 +62,17 @@ public class CreditAccountTest {
 
         Assertions.assertEquals(expected, actual);
     }
+    @Test
+    public void yearChangeMoreCreditLimitBalanceTest() {
+        CreditAccount account = new CreditAccount(1000, 6_000, 5);
+
+        account.pay(7000);
+
+        int expected = 0;
+        int actual = account.yearChange();
+
+        Assertions.assertEquals(expected, actual);
+    }
 
    ////////////////////////////////////////////////Тест исключения для rate///////////////////////////////////////////////
     @Test
