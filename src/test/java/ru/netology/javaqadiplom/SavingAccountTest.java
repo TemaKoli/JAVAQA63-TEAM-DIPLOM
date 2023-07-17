@@ -96,22 +96,8 @@ public class SavingAccountTest {
         );
 
 
-
-        Assertions.assertEquals(200 , account.yearChange());
+        Assertions.assertEquals(200, account.yearChange());
     }
-
-    @Test
-    public void shouldWhenRateIsLessZero()  { // проверка на отрицательную ставку
-
-        Assertions.assertThrows(IllegalArgumentException.class,
-                ()->{
-                    new SavingAccount(2_000,1_000,15_000,-10);
-
-
-                });
-
-    }
-
     //@Test
     //public void shouldPayBooleanPayWhenInt() {              // тест на тип boolean Pay Account
 
@@ -141,7 +127,7 @@ public class SavingAccountTest {
         int expected = 3;
         int actual = account.rate;
 
-        Assertions.assertEquals(expected,actual);
+        Assertions.assertEquals(expected, actual);
     }
 
     @Test
@@ -151,7 +137,7 @@ public class SavingAccountTest {
 
         account.yearChange();
 
-        Assertions.assertEquals(0,account.yearChange());
+        Assertions.assertEquals(0, account.yearChange());
     }
 
     @Test
@@ -165,11 +151,11 @@ public class SavingAccountTest {
         );
 
 
-
-        Assertions.assertEquals(0 , account.yearChange());
+        Assertions.assertEquals(0, account.yearChange());
     }
+
     @Test
-    public void testRateWhenMoreMaxBalance() { //проверка начисления процента, при балансе больше maxBalance(Ошибка в коде )
+    public void testRateWhenMoreMaxBalance() { //проверка начисления процента, при балансе больше maxBalance(Добавить исключение)
         SavingAccount account = new SavingAccount(
 
                 15_000,
@@ -177,14 +163,14 @@ public class SavingAccountTest {
                 10_000,
                 5
         );
+        account.yearChange();
 
-
-
-        Assertions.assertEquals(500 , account.yearChange());
+        Assertions.assertEquals(0, account.yearChange());
     }
 
+
     @Test
-    public void shouldYearChangeOnNegativeBalance() {
+    public void shouldYearChangeOnNegativeBalance() { // Проверка на отрицательный баланс
         SavingAccount account = new SavingAccount(
                 -200,
                 0,
@@ -195,6 +181,101 @@ public class SavingAccountTest {
         account.yearChange();
 
         Assertions.assertEquals(0, account.yearChange());
+    }
+
+    @Test
+    public void shouldYearChangeWhenMinBalanceMoreMaxBalance() { // Проверка на то, что минБаланс больше максБаланс
+        SavingAccount account = new SavingAccount(
+                6_000,
+                15_000,
+                10_000,
+                15
+        );
+
+        account.yearChange();
+
+        Assertions.assertEquals(0, account.yearChange());
+    }
+
+    @Test
+    public void shouldWhenRateLessZero() { // проверка на отрицательную ставку (добавить исключение)
+        SavingAccount account = new SavingAccount(
+                6_000,
+                5_000,
+                10_000,
+                -15
+        );
+
+        account.yearChange();
+
+        Assertions.assertEquals(0, account.yearChange());
+    }
+
+    @Test
+    public void shouldWhenNegativeMinBalance() { // проверка на отрицательный минимальный баланс (добавить исключение)
+        SavingAccount account = new SavingAccount(
+                6_000,
+                -1_000,
+                10_000,
+                15
+        );
+
+        account.yearChange();
+
+        Assertions.assertEquals(0, account.yearChange());
+    }
+
+    @Test
+    public void shouldExceptionWhenRateIsLessZero() { // проверка на исключение, на отрицательную ставку
+
+        Assertions.assertThrows(IllegalArgumentException.class, () -> {
+            new SavingAccount(2_000, 1_000, 15_000, -10);
+        });
+
+    }
+    @Test
+    public void shouldExceptionWhenBalanceLessZero() { // проверка на исключение, на отрицательный начальный баланс
+
+        Assertions.assertThrows(IllegalArgumentException.class, () -> {
+            new SavingAccount(-1_000, 1_000, 15_000, 10);
+        });
+
+    }
+
+    @Test
+    public void shouldExceptionWhenBalanceLessMinBalance() { // проверка на исключение, balance < minBalance
+
+        Assertions.assertThrows(IllegalArgumentException.class, () -> {
+            new SavingAccount(500, 1_000, 15_000, 10);
+        });
+
+    }
+
+    @Test
+    public void shouldExceptionWhenBalanceMoreMaxBalance() { // проверка на исключение, balance > maxBalance
+
+        Assertions.assertThrows(IllegalArgumentException.class, () -> {
+            new SavingAccount(20_000, 1_000, 15_000, 10);
+        });
+
+    }
+
+    @Test
+    public void shouldExceptionWhenMinBalanceLessZero() { // проверка на исключение, minBalance < 0
+
+        Assertions.assertThrows(IllegalArgumentException.class, () -> {
+            new SavingAccount(6_000, -1_000, 15_000, 10);
+        });
+
+    }
+
+    @Test
+    public void shouldExceptionWhenMinBalanceMoreMaxBalance() { // проверка на исключение, minBalance >maxBalance
+
+        Assertions.assertThrows(IllegalArgumentException.class, () -> {
+            new SavingAccount(6_000, 15_000, 10_000, 10);
+        });
+
     }
 }
 
