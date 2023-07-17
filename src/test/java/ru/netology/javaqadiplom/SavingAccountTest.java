@@ -183,7 +183,19 @@ public class SavingAccountTest {
         Assertions.assertEquals(500 , account.yearChange());
     }
 
+    @Test
+    public void shouldYearChangeOnNegativeBalance() {
+        SavingAccount account = new SavingAccount(
+                -200,
+                0,
+                10_000,
+                15
+        );
 
+        account.yearChange();
+
+        Assertions.assertEquals(0, account.yearChange());
+    }
 }
 
 
