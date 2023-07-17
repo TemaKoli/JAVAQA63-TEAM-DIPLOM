@@ -16,11 +16,22 @@ public class CreditAccountTest {
 
         Assertions.assertEquals(expected, actual);
     }
+    @Test
+    public void AddWithNegativeRateTest() {
+        CreditAccount account = new CreditAccount(3_000, 6_000, 15);
+
+        boolean expected = false;
+        boolean actual = account.add(-3_000);
+
+        Assertions.assertEquals(expected, actual);
+    }
 
     ////////////////////////////////////////////метод yearChange//////////////////////////////////////////////////
     @Test
     public void yearChangePositiveBalanceTest() {
         CreditAccount account = new CreditAccount(1_000, 6_000, 10);
+
+        account.pay(500);
 
         int expected = 0;
         int actual = account.yearChange();
@@ -30,7 +41,9 @@ public class CreditAccountTest {
 
     @Test
     public void yearChangeNegativeBalanceTest() {
-        CreditAccount account = new CreditAccount(-1_000, 6_000, 10);
+        CreditAccount account = new CreditAccount(1_000, 6_000, 10);
+
+        account.pay(2000);
 
         int expected = -100;
         int actual = account.yearChange();
@@ -40,11 +53,32 @@ public class CreditAccountTest {
 
     @Test
     public void yearChangeZeroBalanceTest() {
-        CreditAccount account = new CreditAccount(0, 6_000, 10);
+        CreditAccount account = new CreditAccount(0, 6_000, 5);
 
-        int expected = 0;
+        account.pay(4000);
+
+        int expected = -100;
         int actual = account.yearChange();
 
         Assertions.assertEquals(expected, actual);
+    }
+
+   ////////////////////////////////////////////////Тест исключения для rate///////////////////////////////////////////////
+    @Test
+    public void IllegalArgumentExceptionRateTest() {
+
+        Assertions.assertThrows(IllegalArgumentException.class, () -> {new CreditAccount(1000, 10000, -15);});
+    }
+    ////////////////////////////////////////////////Тест исключения для initialBalance///////////////////////////////////////////////
+    @Test
+    public void IllegalArgumentExceptionInitialBalanceTest() {
+
+        Assertions.assertThrows(IllegalArgumentException.class, () -> {new CreditAccount(-1000, 10000, 15);});
+    }
+    ////////////////////////////////////////////////Тест исключения для creditLimit///////////////////////////////////////////////
+    @Test
+    public void IllegalArgumentExceptionCreditLimitTest() {
+
+        Assertions.assertThrows(IllegalArgumentException.class, () -> {new CreditAccount(1000, -10000, 15);});
     }
 }
