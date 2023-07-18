@@ -1,4 +1,5 @@
 package ru.netology.javaqadiplom;
+
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
@@ -16,6 +17,7 @@ public class CreditAccountTest {
 
         Assertions.assertEquals(expected, actual);
     }
+
     @Test
     public void AddWithNegativeRateTest() {
         CreditAccount account = new CreditAccount(3_000, 6_000, 15);
@@ -62,6 +64,7 @@ public class CreditAccountTest {
 
         Assertions.assertEquals(expected, actual);
     }
+
     @Test
     public void yearChangeMoreCreditLimitBalanceTest() {
         CreditAccount account = new CreditAccount(1000, 6_000, 5);
@@ -73,6 +76,7 @@ public class CreditAccountTest {
 
         Assertions.assertEquals(expected, actual);
     }
+
     ////////////////////////////////////////////метод pay//////////////////////////////////////////////////
     @Test
     public void payPositiveBalanceTest() {//первоначальный баланс положительный
@@ -85,21 +89,22 @@ public class CreditAccountTest {
 
         Assertions.assertEquals(expected, actual);
     }
+
     @Test
     public void payZeroBalanceTest() {//нулевой первоначальный баланс, баланс после покупки = кредитному лимиту
         CreditAccount account = new CreditAccount(0, 6_000, 5);
 
 
-
         boolean expected = true;// платёж допустим
-        boolean actual =  account.pay(5000);;
+        boolean actual = account.pay(5000);
+        ;
 
         Assertions.assertEquals(expected, actual);
     }
+
     @Test
     public void payBalanceEqualsCreditLimitTest() {// баланс после покупки = кредитному лимиту
         CreditAccount account = new CreditAccount(2000, 5_000, 5);
-
 
 
         boolean expected = true;// платёж допустим
@@ -107,6 +112,7 @@ public class CreditAccountTest {
 
         Assertions.assertEquals(expected, actual);
     }
+
     @Test
     public void payBalanceLessThanLimitTest() {// баланс после покупки < кредитного лимита
         CreditAccount account = new CreditAccount(2000, 5_000, 5);
@@ -116,6 +122,7 @@ public class CreditAccountTest {
         boolean actual = account.pay(8000);
         Assertions.assertEquals(expected, actual);
     }
+
     @Test
     public void payAmountNegativeTest() {// проверка на отрицательный платёж
         CreditAccount account = new CreditAccount(2000, 5_000, 5);
@@ -126,22 +133,30 @@ public class CreditAccountTest {
         Assertions.assertEquals(expected, actual);
     }
 
-   ////////////////////////////////////////////////Тест исключения для rate///////////////////////////////////////////////
+    ////////////////////////////////////////////////Тест исключения для rate///////////////////////////////////////////////
     @Test
     public void IllegalArgumentExceptionRateTest() {
 
-        Assertions.assertThrows(IllegalArgumentException.class, () -> {new CreditAccount(1000, 10000, -15);});
+        Assertions.assertThrows(IllegalArgumentException.class, () -> {
+            new CreditAccount(1000, 10000, -15);
+        });
     }
+
     ////////////////////////////////////////////////Тест исключения для initialBalance///////////////////////////////////////////////
     @Test
     public void IllegalArgumentExceptionInitialBalanceTest() {
 
-        Assertions.assertThrows(IllegalArgumentException.class, () -> {new CreditAccount(-1000, 10000, 15);});
+        Assertions.assertThrows(IllegalArgumentException.class, () -> {
+            new CreditAccount(-1000, 10000, 15);
+        });
     }
+
     ////////////////////////////////////////////////Тест исключения для creditLimit///////////////////////////////////////////////
     @Test
     public void IllegalArgumentExceptionCreditLimitTest() {
 
-        Assertions.assertThrows(IllegalArgumentException.class, () -> {new CreditAccount(1000, -10000, 15);});
+        Assertions.assertThrows(IllegalArgumentException.class, () -> {
+            new CreditAccount(1000, -10000, 15);
+        });
     }
 }
