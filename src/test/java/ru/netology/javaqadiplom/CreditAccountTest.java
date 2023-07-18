@@ -89,10 +89,10 @@ public class CreditAccountTest {
     public void payZeroBalanceTest() {//нулевой первоначальный баланс, баланс после покупки = кредитному лимиту
         CreditAccount account = new CreditAccount(0, 6_000, 5);
 
-        account.pay(5000);
 
-        int expected = -5000;// платёж допустим
-        int actual = account.balance;
+
+        boolean expected = true;// платёж допустим
+        boolean actual =  account.pay(5000);;
 
         Assertions.assertEquals(expected, actual);
     }
@@ -100,10 +100,10 @@ public class CreditAccountTest {
     public void payBalanceEqualsCreditLimitTest() {// баланс после покупки = кредитному лимиту
         CreditAccount account = new CreditAccount(2000, 5_000, 5);
 
-        account.pay(7000);
 
-        int expected = -5000;// платёж допустим
-        int actual = account.balance;
+
+        boolean expected = true;// платёж допустим
+        boolean actual = account.pay(7000);
 
         Assertions.assertEquals(expected, actual);
     }
@@ -111,11 +111,18 @@ public class CreditAccountTest {
     public void payBalanceLessThanLimitTest() {// баланс после покупки < кредитного лимита
         CreditAccount account = new CreditAccount(2000, 5_000, 5);
 
-        account.pay(8000);
 
-        int expected = 2000; //платёж отклонён, баланс не поменялся
-        int actual = account.balance;
+        boolean expected = false; //платёж отклонён, баланс не поменялся
+        boolean actual = account.pay(8000);
+        Assertions.assertEquals(expected, actual);
+    }
+    @Test
+    public void payAmountNegativeTest() {// проверка на отрицательный платёж
+        CreditAccount account = new CreditAccount(2000, 5_000, 5);
 
+
+        boolean expected = false;
+        boolean actual = account.pay(-1000);
         Assertions.assertEquals(expected, actual);
     }
 
