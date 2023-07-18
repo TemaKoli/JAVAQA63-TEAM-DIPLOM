@@ -66,7 +66,7 @@ public class CreditAccountTest {
     public void yearChangeMoreCreditLimitBalanceTest() {
         CreditAccount account = new CreditAccount(1000, 6_000, 5);
 
-        account.pay(7000);
+        account.pay(8000);
 
         int expected = 0;
         int actual = account.yearChange();
