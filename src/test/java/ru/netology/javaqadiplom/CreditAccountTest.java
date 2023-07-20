@@ -59,7 +59,7 @@ public class CreditAccountTest {
 
         account.pay(4000);
 
-        int expected = -100;
+        int expected = -200;
         int actual = account.yearChange();
 
         Assertions.assertEquals(expected, actual);
@@ -85,7 +85,7 @@ public class CreditAccountTest {
         account.pay(2000);
 
         int expected = 3000;
-        int actual = account.balance;
+        int actual = account.getBalance();
 
         Assertions.assertEquals(expected, actual);
     }
@@ -96,7 +96,7 @@ public class CreditAccountTest {
 
 
         boolean expected = true;// платёж допустим
-        boolean actual = account.pay(5000);
+        boolean actual = account.pay(6000);
         ;
 
         Assertions.assertEquals(expected, actual);
@@ -120,6 +120,7 @@ public class CreditAccountTest {
 
         boolean expected = false; //платёж отклонён, баланс не поменялся
         boolean actual = account.pay(8000);
+
         Assertions.assertEquals(expected, actual);
     }
 
