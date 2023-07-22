@@ -59,7 +59,7 @@ public class CreditAccountTest {
 
         account.pay(4000);
 
-        int expected = -100;
+        int expected = -200;
         int actual = account.yearChange();
 
         Assertions.assertEquals(expected, actual);
