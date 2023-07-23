@@ -58,6 +58,7 @@ public class SavingAccountTest {
 
         Assertions.assertFalse(false);
     }
+
     @Test
     public void PayTest() {  // в случае не корректного платежа операция отклоняется, balance остаётся прежним
         SavingAccount account = new SavingAccount(
@@ -155,6 +156,7 @@ public class SavingAccountTest {
 
         Assertions.assertEquals(0, account.yearChange());
     }
+
     @Test
     public void shouldExceptionWhenRateIsLessZero() { // проверка на исключение, на отрицательную ставку
 
