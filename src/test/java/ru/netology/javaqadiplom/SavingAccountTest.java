@@ -59,18 +59,20 @@ public class SavingAccountTest {
         Assertions.assertFalse(false);
     }
 
-    /* @Test
+    @Test
      public void shouldPay() {  // списание суммы(остаток больше maxBalance) (Ошибка кода)
-         SavingAccount account = new SavingAccount(
+         /*SavingAccount account = new SavingAccount(
                  15_000,
                  1_000,
                  10_000,
                  5
          );
-
          account.pay(2_000);
-         Assertions.assertFalse(false);
-     }*/
+         Assertions.assertFalse(false);*/
+        Assertions.assertThrows(IllegalArgumentException.class, () -> {
+            new SavingAccount(15_000, 1_000, 10_000, 5);
+        });
+     }
     @Test
     public void PayTest() {  // в случае не корректного платежа операция отклоняется, balance остаётся прежним
         SavingAccount account = new SavingAccount(
