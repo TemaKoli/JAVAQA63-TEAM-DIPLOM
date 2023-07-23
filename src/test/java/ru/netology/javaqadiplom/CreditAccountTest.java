@@ -27,6 +27,24 @@ public class CreditAccountTest {
 
         Assertions.assertEquals(expected, actual);
     }
+    @Test
+    public void AddWithZeroBalanceTest() {
+        CreditAccount account = new CreditAccount(0, 6_000, 15);
+
+        boolean expected = true;
+        boolean actual = account.add(3_000);
+
+        Assertions.assertEquals(expected, actual);
+    }
+    @Test
+    public void AddWithZeroAddTest() {
+        CreditAccount account = new CreditAccount(0, 6_000, 15);
+
+        boolean expected = false;
+        boolean actual = account.add(0);
+
+        Assertions.assertEquals(expected, actual);
+    }
 
     ////////////////////////////////////////////метод yearChange//////////////////////////////////////////////////
     @Test
@@ -97,7 +115,7 @@ public class CreditAccountTest {
 
         boolean expected = true;// платёж допустим
         boolean actual = account.pay(5000);
-        ;
+
 
         Assertions.assertEquals(expected, actual);
     }
