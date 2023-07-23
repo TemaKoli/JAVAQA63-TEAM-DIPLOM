@@ -7,6 +7,7 @@ public class CreditAccountTest {
 
     /////////////////////////////////////////////метод Add/////////////////////////////////////////////////////
     @Test
+
     public void AddWithPositiveBalanceTest() {
         CreditAccount account = new CreditAccount(2_000, 6_000, 15);
 
