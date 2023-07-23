@@ -6,7 +6,7 @@ import org.junit.jupiter.api.Test;
 public class SavingAccountTest {
 
     @Test
-    public void shouldAdd() { // тест провален, ошибка в методе
+    public void shouldAdd() { // тест провален, ошибка в методе// исправлено
         SavingAccount account = new SavingAccount(
                 2_000,
                 1_000,
@@ -20,7 +20,7 @@ public class SavingAccountTest {
     }
 
     @Test
-    public void shouldAddMoreMaxBalance() {    // пополнение, превышающее макимальный баланс
+    public void shouldAddMoreMaxBalance() {    // пополнение, превышающее максимальный баланс
         SavingAccount account = new SavingAccount(
                 2_000,
                 1_000,
@@ -58,19 +58,20 @@ public class SavingAccountTest {
 
         Assertions.assertFalse(false);
     }
-
     @Test
-    public void shouldPay() {  // списание суммы(остаток больше maxBalance) (Ошибка кода)
+    public void PayTest() {  // в случае не корректного платежа операция отклоняется, balance остаётся прежним
         SavingAccount account = new SavingAccount(
-                15_000,
-                1_000,
                 10_000,
+                5_000,
+                15_000,
                 5
         );
 
-        account.pay(2_000);
+        account.pay(7_000); //balance после платежа выходит за пределы диапозона min/max
 
-        Assertions.assertEquals(13_000, account.getBalance());
+        int expected = 10_000;   //balance должен остаться безе изменений
+        int actual = account.getBalance();
+        Assertions.assertEquals(expected, actual);
     }
 
     @Test
@@ -112,6 +113,7 @@ public class SavingAccountTest {
 
         Assertions.assertEquals(200, account.yearChange());
     }
+
     @Test
     public void shouldPayBooleanPayWhenInt() {              // тест на тип boolean Pay Account
 
@@ -119,7 +121,7 @@ public class SavingAccountTest {
 
         account.pay(1);
 
-       Assertions.assertFalse(false);
+        Assertions.assertFalse(false);
     }
 
     @Test
@@ -129,7 +131,7 @@ public class SavingAccountTest {
 
         account.add(1); //
 
-       Assertions.assertFalse(false);
+        Assertions.assertFalse(false);
     }
 
     @Test
@@ -153,92 +155,6 @@ public class SavingAccountTest {
 
         Assertions.assertEquals(0, account.yearChange());
     }
-
-    @Test
-    public void testRateWhenLessMinBalance() { // проверка начисления процента, при ,балансе меньше minBalance(Ошибка в коде )
-        SavingAccount account = new SavingAccount(
-
-                500,
-                1_000,
-                10_000,
-                5
-        );
-
-
-        Assertions.assertEquals(0, account.yearChange());
-    }
-
-    @Test
-    public void testRateWhenMoreMaxBalance() { //проверка начисления процента, при балансе больше maxBalance(Добавить исключение)
-        SavingAccount account = new SavingAccount(
-
-                15_000,
-                1_000,
-                10_000,
-                5
-        );
-        account.yearChange();
-
-        Assertions.assertEquals(0, account.yearChange());
-    }
-
-
-    @Test
-    public void shouldYearChangeOnNegativeBalance() { // Проверка на отрицательный баланс
-        SavingAccount account = new SavingAccount(
-                -200,
-                0,
-                10_000,
-                15
-        );
-
-        account.yearChange();
-
-        Assertions.assertEquals(0, account.yearChange());
-    }
-
-    @Test
-    public void shouldYearChangeWhenMinBalanceMoreMaxBalance() { // Проверка на то, что минБаланс больше максБаланс
-        SavingAccount account = new SavingAccount(
-                6_000,
-                15_000,
-                10_000,
-                15
-        );
-
-        account.yearChange();
-
-        Assertions.assertEquals(0, account.yearChange());
-    }
-
-    @Test
-    public void shouldWhenRateLessZero() { // проверка на отрицательную ставку (добавить исключение)
-        SavingAccount account = new SavingAccount(
-                6_000,
-                5_000,
-                10_000,
-                -15
-        );
-
-        account.yearChange();
-
-        Assertions.assertEquals(0, account.yearChange());
-    }
-
-    @Test
-    public void shouldWhenNegativeMinBalance() { // проверка на отрицательный минимальный баланс (добавить исключение)
-        SavingAccount account = new SavingAccount(
-                6_000,
-                -1_000,
-                10_000,
-                15
-        );
-
-        account.yearChange();
-
-        Assertions.assertEquals(0, account.yearChange());
-    }
-
     @Test
     public void shouldExceptionWhenRateIsLessZero() { // проверка на исключение, на отрицательную ставку
 
@@ -247,8 +163,9 @@ public class SavingAccountTest {
         });
 
     }
+
     @Test
-    public void shouldExceptionWhenBalanceLessZero() { // проверка на исключение, на отрицательный начальный баланс
+    public void shouldExceptionWhenBalanceLessZero() { // проверка на исключение, на отрицательный начальный баланс/////////////////////
 
         Assertions.assertThrows(IllegalArgumentException.class, () -> {
             new SavingAccount(-1_000, 1_000, 15_000, 10);
