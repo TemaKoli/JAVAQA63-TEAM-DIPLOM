@@ -114,7 +114,7 @@ public class CreditAccountTest {
     }
 
     @Test
-    public void payBalanceLessThanLimitTest() {// баланс после покупки < кредитного лимита
+    public void payBalanceLessThanLimitTest() {// баланс после покупки < кредитного лимита)!)!
         CreditAccount account = new CreditAccount(2000, 5_000, 5);
 
 
