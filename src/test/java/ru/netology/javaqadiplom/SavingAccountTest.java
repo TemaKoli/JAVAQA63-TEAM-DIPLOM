@@ -59,18 +59,18 @@ public class SavingAccountTest {
         Assertions.assertFalse(false);
     }
 
-   /* @Test
-    public void shouldPay() {  // списание суммы(остаток больше maxBalance) (Ошибка кода)
-        SavingAccount account = new SavingAccount(
-                15_000,
-                1_000,
-                10_000,
-                5
-        );
+    /* @Test
+     public void shouldPay() {  // списание суммы(остаток больше maxBalance) (Ошибка кода)
+         SavingAccount account = new SavingAccount(
+                 15_000,
+                 1_000,
+                 10_000,
+                 5
+         );
 
-        account.pay(2_000);
-        Assertions.assertFalse(false);
-    }*/
+         account.pay(2_000);
+         Assertions.assertFalse(false);
+     }*/
     @Test
     public void PayTest() {  // в случае не корректного платежа операция отклоняется, balance остаётся прежним
         SavingAccount account = new SavingAccount(
@@ -126,6 +126,7 @@ public class SavingAccountTest {
 
         Assertions.assertEquals(200, account.yearChange());
     }
+
     @Test
     public void shouldPayBooleanPayWhenInt() {              // тест на тип boolean Pay Account
 
@@ -133,7 +134,7 @@ public class SavingAccountTest {
 
         account.pay(1);
 
-       Assertions.assertFalse(false);
+        Assertions.assertFalse(false);
     }
 
     @Test
@@ -143,7 +144,7 @@ public class SavingAccountTest {
 
         account.add(1); //
 
-       Assertions.assertFalse(false);
+        Assertions.assertFalse(false);
     }
 
     @Test
@@ -269,6 +270,7 @@ public class SavingAccountTest {
         });
 
     }
+
     @Test
     public void shouldExceptionWhenBalanceLessZero() { // проверка на исключение, на отрицательный начальный баланс/////////////////////
 
