@@ -28,6 +28,7 @@ public class CreditAccountTest {
 
         Assertions.assertEquals(expected, actual);
     }
+
     @Test
     public void AddWithZeroBalanceTest() {
         CreditAccount account = new CreditAccount(0, 6_000, 15);
@@ -37,6 +38,7 @@ public class CreditAccountTest {
 
         Assertions.assertEquals(expected, actual);
     }
+
     @Test
     public void AddWithZeroAddTest() {
         CreditAccount account = new CreditAccount(0, 6_000, 15);
